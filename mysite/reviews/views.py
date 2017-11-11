@@ -2,9 +2,11 @@ from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from . import models
 from .models import Review
 from . import forms
+from ipware.ip import get_ip
 import datetime
 
 # Create your views here.
@@ -16,6 +18,8 @@ def index(request):
             'latest_review_list': latest_review_list,
         }
         return HttpResponse(template.render(context, request))
+    else:
+        return redirect("/login")
 
 def detail(request, review_id):
     review = get_object_or_404(Review, pk=review_id)
@@ -27,7 +31,8 @@ def write_review(request):
             r_name = request.user.get_username()
             form = forms.WriteReviewForm(request.POST)
             if form.is_valid():
-                int_rating = models.Review(rating = form.cleaned_data['rating'], title = form.cleaned_data['title'], summary = form.cleaned_data['summary'], company = form.cleaned_data['company'], reviewer_name = r_name)
+                ip = get_ip(request)
+                int_rating = models.Review(ip_address = ip, rating = form.cleaned_data['rating'], title = form.cleaned_data['title'], summary = form.cleaned_data['summary'], company = form.cleaned_data['company'], reviewer_name = r_name)
                 int_rating.save()
                 context = {"form": form}
                 return HttpResponseRedirect("index")

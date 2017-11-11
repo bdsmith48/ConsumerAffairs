@@ -1,6 +1,11 @@
-<h1>Title: {{ review.title }}</h1>
+{% if user.is_authenticated %}
+    <h1>Title: {{ review.title }}</h1>
 
-<p>Reviewer name: {{ review.reviewer_name }}</p>
-<p>Company that was reviewed: {{ review.company }}</p> 
-<p>Review text: {{ review.summary }}</p>
-<p>Submission date: {{ review.submission_date }}</p>
+    <p>Reviewer name: {{ review.reviewer_name }}</p>
+    <p>Reviewer IP address: {{ review.ip_address }}</p>
+    <p>Company that was reviewed: {{ review.company }}</p> 
+    <p>Review text: {{ review.summary }}</p>
+    <p>Submission date: {{ review.submission_date }}</p>
+{% else %}
+    <a href="login"> Login <a/></br?
+{% endif %}

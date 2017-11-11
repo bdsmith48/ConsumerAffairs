@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+USE_X_FORWARDED_FOR = True
+
 LOGIN_REDIRECT_URL = 'index'
 # Application definition
 

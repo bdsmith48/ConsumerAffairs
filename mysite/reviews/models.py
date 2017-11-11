@@ -9,4 +9,5 @@ class Review(models.Model):
     submission_date = models.DateTimeField('date submitted', auto_now=True)
     company = models.CharField(max_length=30)
     reviewer_name = models.CharField(max_length=30)
+    ip_address = models.GenericIPAddressField(protocol='IPv4', default='127.0.0.1')
     rating = models.IntegerField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0)])
