@@ -1,0 +1,6 @@
+<h2>Write a review:</h2>
+<form method="post" action="">
+  {% csrf_token %}
+  {{ form.as_table}}
+  <input type="submit" value="Post" />
+</form>

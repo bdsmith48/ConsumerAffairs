@@ -1,0 +1,14 @@
+{% if user.is_authenticated %}
+    <a href="{% url 'write_review' %}"> Write New Review <a/></br>
+    {% if latest_review_list %}
+    <ul>
+        {% for review in latest_review_list %}
+            <li><a href="{% url 'detail' review.id %}>{{ review.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>No reviews are available.</p>
+    {% endif %}
+{% else %}
+    <a href="login"> Login <a/></br>
+{% endif %}
