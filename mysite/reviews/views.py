@@ -10,7 +10,7 @@ import datetime
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
-        latest_review_list = Review.objects.all().filter(reviewer_name = request.user.get_username()).order_by('-submission_date')
+        latest_review_list = Review.objects.filter(reviewer_name=request.user.username).order_by('-submission_date')
         template = loader.get_template('reviews/index.html')
         context = {
             'latest_review_list': latest_review_list,
